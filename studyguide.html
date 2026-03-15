@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH 2060 — Concrete Problem-Solving Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --u1:     #5b35b0;
+    --u1-bg:  #f2eefe;
+    --u1-mid: #c4b0f0;
+    --u2:     #b02060;
+    --u2-bg:  #fdeef4;
+    --u2-mid: #e8a8c8;
+    --u3:     #166840;
+    --u3-bg:  #eaf6ee;
+    --u3-mid: #90cca8;
+    --u4:     #a84010;
+    --u4-bg:  #fdf0e8;
+    --u4-mid: #e8b090;
+    --u5:     #154e96;
+    --u5-bg:  #eaf0fb;
+    --u5-mid: #90b0e0;
+    --ink:    #1a1820;
+    --soft:   #5a5868;
+    --rule:   #e2dfe8;
+    --ex-bg:  #f2f8f3;
+    --ex-bd:  #90cca8;
+    --warn-bg:#fdf6ee;
+    --warn-bd:#e8b878;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: #faf9f7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  /* ── masthead ── */
+  .masthead {
+    text-align: center;
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .masthead h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .masthead p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-top: 6px;
+  }
+
+  /* ── unit block ── */
+  .unit {
+    margin-bottom: 52px;
+  }
+
+  .unit-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 6px 6px 0 0;
+    border-width: 1.5px 1.5px 0 1.5px;
+    border-style: solid;
+  }
+  .unit-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .unit-title h2 {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .unit-body {
+    border-width: 0 1.5px 1.5px 1.5px;
+    border-style: solid;
+    border-radius: 0 0 6px 6px;
+    background: #fff;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ── topic card ── */
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 12px 14px;
+    background: #fdfcfb;
+  }
+
+  .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── steps ── */
+  ol.steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+  }
+  ol.steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  ol.steps li::before {
+    content: counter(step);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* ── formula block ── */
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: #f4f2fb;
+    border-radius: 4px;
+    padding: 7px 10px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #2a1858;
+    border-left: 3px solid var(--rule);
+  }
+
+  /* ── example block ── */
+  .ex {
+    background: var(--ex-bg);
+    border: 1px solid var(--ex-bd);
+    border-radius: 4px;
+    padding: 8px 11px;
+    margin-top: 10px;
+    font-size: 12.5px;
+  }
+  .ex-hed {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--u3);
+    margin-bottom: 5px;
+  }
+  .ex-hed + .ex-hed { margin-top: 8px; }
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    display: block;
+    margin-bottom: 2px;
+    word-break: break-word;
+  }
+
+  /* ── warning block ── */
+  .warn {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-bd);
+    border-radius: 4px;
+    padding: 7px 11px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: #6a3800;
+  }
+  .warn strong { color: #8a4400; }
+
+  .note {
+    font-size: 12.5px;
+    color: var(--soft);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* ── unit color themes ── */
+  .u1 .unit-title { background: var(--u1-bg); border-color: var(--u1-mid); }
+  .u1 .unit-body  { border-color: var(--u1-mid); }
+  .u1 .unit-badge { background: var(--u1); }
+  .u1 .card-title { color: var(--u1); }
+  .u1 ol.steps li::before { background: var(--u1); }
+  .u1 .formula    { border-left-color: var(--u1); }
+
+  .u2 .unit-title { background: var(--u2-bg); border-color: var(--u2-mid); }
+  .u2 .unit-body  { border-color: var(--u2-mid); }
+  .u2 .unit-badge { background: var(--u2); }
+  .u2 .card-title { color: var(--u2); }
+  .u2 ol.steps li::before { background: var(--u2); }
+  .u2 .formula    { border-left-color: var(--u2); }
+
+  .u3 .unit-title { background: var(--u3-bg); border-color: var(--u3-mid); }
+  .u3 .unit-body  { border-color: var(--u3-mid); }
+  .u3 .unit-badge { background: var(--u3); }
+  .u3 .card-title { color: var(--u3); }
+  .u3 ol.steps li::before { background: var(--u3); }
+  .u3 .formula    { border-left-color: var(--u3); }
+
+  .u4 .unit-title { background: var(--u4-bg); border-color: var(--u4-mid); }
+  .u4 .unit-body  { border-color: var(--u4-mid); }
+  .u4 .unit-badge { background: var(--u4); }
+  .u4 .card-title { color: var(--u4); }
+  .u4 ol.steps li::before { background: var(--u4); }
+  .u4 .formula    { border-left-color: var(--u4); }
+
+  .u5 .unit-title { background: var(--u5-bg); border-color: var(--u5-mid); }
+  .u5 .unit-body  { border-color: var(--u5-mid); }
+  .u5 .unit-badge { background: var(--u5); }
+  .u5 .card-title { color: var(--u5); }
+  .u5 ol.steps li::before { background: var(--u5); }
+  .u5 .formula    { border-left-color: var(--u5); }
+
+  /* ── print ── */
+  @media print {
+    body { background: #fff; padding: 0; max-width: 100%; }
+    .unit { page-break-before: always; margin-bottom: 0; }
+    .unit:first-child { page-break-before: avoid; }
+    .card { page-break-inside: avoid; }
+    .ex   { page-break-inside: avoid; }
+    .warn { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1>MATH 2060 — Concrete Problem-Solving Guide</h1>
+  <p>Final Exam · Exact steps · Mini worked examples</p>
+</div>
+
+
+<!-- ══ UNIT 1 ══ -->
+<div class="unit u1">
+  <div class="unit-title">
+    <span class="unit-badge">Unit 1</span>
+    <h2>Linear Independence &amp; Bases — Probs 1–6</h2>
+  </div>
+  <div class="unit-body">
+
+    <div class="card">
+      <div class="card-title">Linearly independent? — vectors in R^n</div>
+      <ol class="steps">
+        <li>Put the vectors as <strong>columns</strong> of a matrix</li>
+        <li>Row reduce to echelon form</li>
+        <li>Count pivots. Pivots = number of vectors → independent. Any free variable (column without a pivot) → dependent</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 1a: [1,7,7], [2,7,7], [3,7,7]</div>
+        <span class="mono">put as columns → row reduce → rows 2 and 3 zero out → only 1 pivot</span>
+        <span class="mono">3 vectors, 1 pivot → DEPENDENT</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Linearly independent? — polynomials in Pn</div>
+      <ol class="steps">
+        <li>Pull coefficients from each polynomial into a row vector — e.g. 3 − x + 9x² → [3, −1, 9]</li>
+        <li>Put those rows into a matrix and row reduce</li>
+        <li>Same rule: pivots = number of polynomials → independent</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 2a</div>
+        <span class="mono">3−x+9x²  →  [3, −1, 9]</span>
+        <span class="mono">5−6x+3x² →  [5, −6,  3]</span>
+        <span class="mono">1+x−5x²  →  [1,  1, −5]</span>
+        <span class="mono">put as rows → row reduce → count pivots</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Is this set a basis?</div>
+      <ol class="steps">
+        <li>Check linear independence (above)</li>
+        <li>Count vectors — must equal dim of the space. dim(R^n) = n, dim(Pn) = n+1, dim(R^(m×n)) = m·n</li>
+        <li>Both conditions → basis. Either fails → not a basis</li>
+        <li>Square matrix shortcut: det ≠ 0 → basis, det = 0 → not a basis</li>
+      </ol>
+      <div class="warn"><strong>e.g. Prob 3b:</strong> only 2 vectors for P2 (dim = 3) → cannot be a basis no matter what</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Find basis for a subspace — spanning set given (Prob 6)</div>
+      <ol class="steps">
+        <li>Put the spanning vectors as <strong>rows</strong> of a matrix</li>
+        <li>Row reduce to echelon form</li>
+        <li>The nonzero rows of the echelon form = basis</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 6</div>
+        <span class="mono">put [1,2,1], [3,1,−1], [1,−3,−3] as rows → row reduce → keep nonzero rows</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Find basis for a subspace defined by a constraint (Probs 5, 20)</div>
+      <ol class="steps">
+        <li>Use the constraint to solve for one variable. e.g. a2 − 2a1 = a0  →  a0 = a2 − 2a1</li>
+        <li>Write the general element of the space, substituting in</li>
+        <li>Group by each free variable — each group becomes a basis vector</li>
+        <li>Count the groups = dimension</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 5a: { a2x² + a1x + a0 : a2 − 2a1 = a0 }</div>
+        <span class="mono">a0 = a2 − 2a1</span>
+        <span class="mono">general element: (a2−2a1) + a1x + a2x²</span>
+        <span class="mono">group by a1:  a1·(−2 + x)</span>
+        <span class="mono">group by a2:  a2·(1 + x²)</span>
+        <span class="mono">basis: { −2+x,  1+x² }    dim = 2</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ UNIT 2 ══ -->
+<div class="unit u2">
+  <div class="unit-title">
+    <span class="unit-badge">Unit 2</span>
+    <h2>Dot Products &amp; Orthogonality — Probs 7–13</h2>
+  </div>
+  <div class="unit-body">
+
+    <div class="card">
+      <div class="card-title">Compute dot product and length</div>
+      <div class="formula">u·v  =  u1·v1 + u2·v2 + u3·v3
+||v||  =  sqrt(v·v)</div>
+      <ol class="steps">
+        <li>Multiply entry by entry, add everything up</li>
+        <li>Result = 0 → orthogonal. Result ≠ 0 → not orthogonal</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 8b: u = [1,1,1], v = [1,2,−3]</div>
+        <span class="mono">u·v = 1(1) + 1(2) + 1(−3) = 0  →  orthogonal ✓</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Parallel vectors (Prob 9)</div>
+      <div class="formula">|u·v|  =  ||u|| · ||v||</div>
+      <p class="note">Parallel means the angle is 0° or 180°, so cos(θ) = ±1. The absolute value of the dot product equals the product of the lengths.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Is v orthogonal to all of span{v1, v2}? (Prob 11b)</div>
+      <ol class="steps">
+        <li>Compute v·v1 and v·v2 separately</li>
+        <li>Both = 0 → orthogonal to the whole span</li>
+        <li>Either ≠ 0 → not orthogonal to the span</li>
+      </ol>
+      <p class="note">Dot product distributes: v·(c1·v1 + c2·v2) = c1(v·v1) + c2(v·v2). If v kills each basis vector it kills every combo.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Show span{v} = solution set of ax + by = 0 (Probs 10, 11c)</div>
+      <ol class="steps">
+        <li>Plug v into the equation — verify it satisfies it</li>
+        <li>Solve the system generally by row reducing — express in terms of free variables</li>
+        <li>Show the general solution is exactly scalar multiples of v</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Find orthogonal complement S⊥ (Probs 7, 11–12)</div>
+      <ol class="steps">
+        <li>Get a basis for S — call the vectors b1, b2, ...</li>
+        <li>Let w = (x, y, z) be unknown. Write one equation per basis vector: w·b1 = 0, w·b2 = 0, ...</li>
+        <li>Collect those equations into a homogeneous linear system — put coefficients in a matrix</li>
+        <li>Row reduce, find free variables, write general solution</li>
+        <li>Direction vectors from free variables = basis for S⊥</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 7: S has basis { [1,2,1], [0,1,1] }</div>
+        <span class="mono">w·[1,2,1] = 0   →   x + 2y + z = 0</span>
+        <span class="mono">w·[0,1,1] = 0   →       y + z = 0</span>
+        <span class="mono">matrix [[1,2,1],[0,1,1]] → row reduce → y=−z, x=z</span>
+        <span class="mono">w = z·[1,−1,1]   →   basis for S⊥: { [1,−1,1] }</span>
+      </div>
+      <div class="warn"><strong>Check:</strong> dim(S) + dim(S⊥) = dim of the whole space</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ UNIT 3 ══ -->
+<div class="unit u3">
+  <div class="unit-title">
+    <span class="unit-badge">Unit 3</span>
+    <h2>Spaces, Rank &amp; Null Space — Probs 14–16, 20–22, 38–42</h2>
+  </div>
+  <div class="unit-body">
+
+    <div class="card">
+      <div class="card-title">Is vector b in Col(A)? (Probs 14, 50)</div>
+      <ol class="steps">
+        <li>Form augmented matrix [A | b]</li>
+        <li>Row reduce the whole thing</li>
+        <li>Any row like [0 0 ... 0 | nonzero] → inconsistent → NOT in Col(A)</li>
+        <li>No such row → IS in Col(A)</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 14c: A = [[1,1],[1,1]], b = [1,3]</div>
+        <span class="mono">augmented: [[1,1|1],[1,1|3]]  →  R2−R1  →  [[1,1|1],[0,0|2]]</span>
+        <span class="mono">row [0,0|2] → inconsistent → NOT in Col(A)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Find rank of a matrix (Prob 22)</div>
+      <ol class="steps">
+        <li>Row reduce to echelon form</li>
+        <li>Count nonzero rows = number of pivots = rank</li>
+      </ol>
+      <p class="note">rank = dim(row space) = dim(col space). Zero matrix → rank 0. Max possible rank = min(m, n).</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Null space of a MAP h — which inputs give output 0? (Probs 38–40)</div>
+      <ol class="steps">
+        <li>Plug a general input into h and set output = 0</li>
+        <li>Solve for what the input must look like — that set is the null space</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 38: h(p(x)) = x·p(x), domain = P3</div>
+        <span class="mono">need x·p(x) = 0 for all x  →  only p(x) = 0 works</span>
+        <span class="mono">null space = {0},   nullity = 0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Range space of a MAP h — what can h actually output? (Probs 38–40)</div>
+      <ol class="steps">
+        <li>Plug a general input into h and observe what form the output always takes</li>
+        <li>Describe that set of all possible outputs — that is the range space</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 38: h(p(x)) = x·p(x), domain = P3</div>
+        <span class="mono">general input:  a0 + a1x + a2x² + a3x³</span>
+        <span class="mono">output:         a0x + a1x² + a2x³ + a3x⁴</span>
+        <span class="mono">→ output ALWAYS has no constant term</span>
+        <span class="mono">range = { polynomials in P4 with no constant term }</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Is a specific thing in the null space or range space? (Prob 38a–e)</div>
+      <ol class="steps">
+        <li><strong>Null space check:</strong> plug it into h as the input. Does h(thing) = 0? Yes → in null space. No → not.</li>
+        <li><strong>Range space check:</strong> work backwards. Set h(input) = thing and solve for input. Valid solution in the domain → in range. No valid solution → not in range.</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">Prob 38a — is x³ in the range of h(p(x)) = x·p(x)?</div>
+        <span class="mono">need x·p(x) = x³  →  p(x) = x²</span>
+        <span class="mono">x² is in P3 (the domain) ✓  →  YES, x³ is in the range</span>
+        <div class="ex-hed">Prob 38c — is 7 in the range?</div>
+        <span class="mono">need x·p(x) = 7  →  p(x) = 7/x  →  not a polynomial</span>
+        <span class="mono">→  NOT in the range</span>
+        <div class="ex-hed">Prob 38b — is 0 in the null space?</div>
+        <span class="mono">h(0) = x·0 = 0 ✓  →  YES, 0 is in the null space</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Null space of a MATRIX H — solve Hx = 0 (Probs 39–40)</div>
+      <ol class="steps">
+        <li>Row reduce [H | 0]</li>
+        <li>Identify free variables (columns with no pivot)</li>
+        <li>Express each pivot variable in terms of the free variables</li>
+        <li>Write general solution — the direction vectors = basis for the null space</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. H = [[1,2],[2,4]]</div>
+        <span class="mono">[[1,2|0],[2,4|0]]  R2−2R1  →  [[1,2|0],[0,0|0]]</span>
+        <span class="mono">x2 is free,  x1 = −2x2  →  null space = span{ [−2, 1] }</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Rank–Nullity (Prob 41)</div>
+      <div class="formula">rank + nullity = dim(domain)</div>
+      <ol class="steps">
+        <li>Find dim(domain): R^n → n,   Pn → n+1,   R^(m×n) → m·n</li>
+        <li>Know rank → nullity = dim(domain) − rank</li>
+        <li>Know nullity → rank = dim(domain) − nullity</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">Prob 41a: h: R^5 → R^8, rank = 5</div>
+        <span class="mono">nullity = 5 − 5 = 0</span>
+        <div class="ex-hed">Prob 41b: h: P3 → P3, rank = 1</div>
+        <span class="mono">dim(P3) = 4,   nullity = 4 − 1 = 3</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ UNIT 4 ══ -->
+<div class="unit u4">
+  <div class="unit-title">
+    <span class="unit-badge">Unit 4</span>
+    <h2>Linear Maps &amp; Matrices — Probs 23–25, 43–50</h2>
+  </div>
+  <div class="unit-body">
+
+    <div class="card">
+      <div class="card-title">Is h a linear map? (Probs 23–25)</div>
+      <ol class="steps">
+        <li>Check h(0) = 0 first — if not, stop, it's not linear</li>
+        <li>Check h(u + v) = h(u) + h(v)</li>
+        <li>Check h(cu) = c·h(u)</li>
+      </ol>
+      <div class="warn"><strong>Instant fails — no need to check further:</strong> output has an added constant (e.g. +1 anywhere), any variable is squared, two different input components are multiplied together, absolute value appears anywhere</div>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 23c: h(x,y,z) = [1, 1]</div>
+        <span class="mono">h(0,0,0) = [1,1] ≠ [0,0]  →  NOT linear, stop</span>
+        <div class="ex-hed">e.g. Prob 23d: h(x,y,z) = [2x+y, 3y−4z]</div>
+        <span class="mono">h(0,0,0) = [0,0] ✓   all terms linear   →   IS a linear map</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Find matrix H using standard bases (Probs 45, 48a)</div>
+      <ol class="steps">
+        <li>Apply h to each standard basis vector: e1 = [1,0,...], e2 = [0,1,...], etc.</li>
+        <li>Each result becomes one column of H, placed left to right</li>
+        <li>The matrix satisfies H·v = h(v) for any v</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 45: h(e1) = [2,2,0], h(e2) = [0,1,−1]</div>
+        <span class="mono">H = [ [2,  0],</span>
+        <span class="mono">      [2,  1],</span>
+        <span class="mono">      [0, −1] ]    (each h(ei) is a column)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Where does h send a specific vector? (Probs 44, 48b)</div>
+      <ol class="steps">
+        <li>Write the vector as a linear combination of vectors whose images you know</li>
+        <li>Use linearity: h(c1·v1 + c2·v2) = c1·h(v1) + c2·h(v2)</li>
+        <li>Substitute in the known outputs and simplify</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 44: h(1)=1+x, h(x)=1+2x, h(x²)=x−x³</div>
+        <span class="mono">want h(1 − 3x + 2x²)</span>
+        <span class="mono">= 1·h(1) + (−3)·h(x) + 2·h(x²)</span>
+        <span class="mono">= (1+x) − 3(1+2x) + 2(x−x³)</span>
+        <span class="mono">= 1+x − 3−6x + 2x−2x³  =  −2 − 3x − 2x³</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Find Rep_B(v) — v's coordinates in basis B</div>
+      <ol class="steps">
+        <li>Set up augmented matrix [b1 | b2 | ... | v] with B vectors as columns, v on the right</li>
+        <li>Row reduce</li>
+        <li>Solution gives c1, c2, ... such that v = c1·b1 + c2·b2 + ...</li>
+        <li>Rep_B(v) = [c1, c2, ...]^T</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">B = { [1,1], [1,0] }, find Rep_B([3,1])</div>
+        <span class="mono">[[1,1|3],[1,0|1]]  →  row reduce  →  c1=1, c2=2</span>
+        <span class="mono">Rep_B([3,1]) = [1, 2]^T</span>
+        <span class="mono">check: 1·[1,1] + 2·[1,0] = [3,1] ✓</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Build H_{B,D} for general bases (Probs 43a, 47, 48c)</div>
+      <ol class="steps">
+        <li>For each basis vector b in B: compute h(b), using linearity if needed</li>
+        <li>Express h(b) in terms of the D basis vectors — set up [d1 | d2 | ... | h(b)] and row reduce to get h(b)'s D-coordinates</li>
+        <li>Those D-coordinates = one column of H_{B,D}</li>
+        <li>Repeat for every b in B — stack columns left to right in the same order as B</li>
+      </ol>
+      <div class="formula">H_{B,D} · Rep_B(v) = Rep_D(h(v))</div>
+      <div class="ex">
+        <div class="ex-hed">e.g. B={b1,b2}, D={d1,d2}, h(b1)=3d1+2d2, h(b2)=d1−d2</div>
+        <span class="mono">col 1 = D-coords of h(b1) = [3,  2]^T</span>
+        <span class="mono">col 2 = D-coords of h(b2) = [1, −1]^T</span>
+        <span class="mono">H_{B,D} = [ [3, 1], [2, −1] ]</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ UNIT 5 ══ -->
+<div class="unit u5">
+  <div class="unit-title">
+    <span class="unit-badge">Unit 5</span>
+    <h2>Inverses, Change of Basis &amp; Determinants — Probs 57–75</h2>
+  </div>
+  <div class="unit-body">
+
+    <div class="card">
+      <div class="card-title">Inverse of a 2×2 (Prob 62)</div>
+      <div class="formula">[a b; c d]^(−1)  =  1/(ad−bc) · [d, −b; −c, a]</div>
+      <ol class="steps">
+        <li>Compute ad − bc. If = 0 → no inverse, stop</li>
+        <li>Swap a and d, negate b and c</li>
+        <li>Divide the whole matrix by ad − bc</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 62a: [[2, 1], [−1, 1]]</div>
+        <span class="mono">det = 2(1) − 1(−1) = 3</span>
+        <span class="mono">inverse = (1/3) · [[1, −1], [1, 2]]</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Inverse of a larger matrix — Gauss-Jordan (Prob 64)</div>
+      <ol class="steps">
+        <li>Write augmented matrix [A | I] where I is the identity of the same size as A</li>
+        <li>Row reduce the left side all the way to I</li>
+        <li>Whatever the right side has become = A^(−1)</li>
+        <li>If left side gets a zero row → singular, no inverse</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Change of basis: D → Standard E (Prob 67)</div>
+      <ol class="steps">
+        <li>Put the D basis vectors as columns to form matrix M</li>
+        <li>M converts D-coordinates into standard coordinates</li>
+        <li>M^(−1) converts standard coordinates into D-coordinates</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. Prob 67: D = { [2,1], [−2,4] }</div>
+        <span class="mono">M = [[2,−2],[1,4]]   (columns = D basis vectors)</span>
+        <span class="mono">M: D-coords → standard.   M^(−1): standard → D-coords</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Change of basis: B → D general (Prob 68)</div>
+      <ol class="steps">
+        <li>Put D-vectors as columns on the left, B-vectors as columns on the right</li>
+        <li>Form [D | B] and row reduce until left side = I</li>
+        <li>Right side is now the change-of-basis matrix from B to D</li>
+      </ol>
+      <p class="note">Same idea as Gauss-Jordan for an inverse — you're expressing each B vector in D-coordinates.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Determinant via row reduction (Probs 72–73)</div>
+      <ol class="steps">
+        <li>Start a running multiplier = 1</li>
+        <li>Swap two rows → multiply running multiplier by −1</li>
+        <li>Scale a row by k → multiply running multiplier by k (divide back out at the end!)</li>
+        <li>Add a multiple of one row to another → multiplier unchanged</li>
+        <li>Once in echelon form: multiply all diagonal entries together, then multiply by the running multiplier</li>
+      </ol>
+      <div class="ex">
+        <div class="ex-hed">e.g. swap once, scale a row by 3 for convenience, reach echelon diag [2, −1, 4]</div>
+        <span class="mono">after swap:         multiplier = −1</span>
+        <span class="mono">after scale by 3:   multiplier = −3</span>
+        <span class="mono">diagonal product:   2·(−1)·4 = −8</span>
+        <span class="mono">raw result: (−3)·(−8) = 24</span>
+        <span class="mono">scaled by 3 just for convenience → divide back out: 24/3 = 8</span>
+        <span class="mono">det = 8</span>
+      </div>
+      <div class="warn"><strong>Key trap:</strong> scaling a row changes the det. If you scale to make arithmetic easier, you MUST divide it back out at the end.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Left vs. right inverse (Prob 61)</div>
+      <ol class="steps">
+        <li>H is m×n with rank r</li>
+        <li>rank = m → right inverse exists. H is wide (m &lt; n), map is onto</li>
+        <li>rank = n → left inverse exists. H is tall (m &gt; n), map is one-to-one</li>
+        <li>m = n and full rank → regular two-sided inverse</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
